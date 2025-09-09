@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BPMeasurementsERutledge7809.Models.BPMeasurement>
+
+@{
+    ViewData["Title"] = "All Measurements";
+}
+
+<h2>All Measurements</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+<p>
+    <a asp-action="Add">Add new BP measurement</a> |
+    <a asp-controller="Home" asp-action="Info">Information on BP measurements</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Reading</th>
+            <th>Category</th>
+            <th>Position</th>
+            <th>Date Taken</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Systolic / @item.Diastolic</td>
+                <td style="color:@GetCategoryColor(item.Category)">
+                    @item.Category
+                </td>
+                <td>@item.Position?.Name</td>
+                <td>@item.MeasurementDate.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@functions {
+    string GetCategoryColor(string category)
+    {
+        return category switch
+        {
+            "Normal" => "darkgreen",
+            "Elevated" => "blue",
+            "Hypertension Stage 1" => "orange",
+            "Hypertension Stage 2" => "orangered",
+            "Hypertensive Crisis" => "darkred",
+            _ => "black"
+        };
+    }
+}

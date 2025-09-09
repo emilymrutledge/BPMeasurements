@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\BPMeasurementsERutledge7809.props" />
+</Project>
