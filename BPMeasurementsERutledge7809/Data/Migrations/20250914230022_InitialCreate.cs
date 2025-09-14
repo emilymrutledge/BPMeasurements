@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace BPMeasurementsERutledge7809.Migrations
+namespace BPMeasurementsERutledge7809.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class RecreateWithPosition : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,8 +17,8 @@ namespace BPMeasurementsERutledge7809.Migrations
                 name: "Positions",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ID = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -26,21 +26,21 @@ namespace BPMeasurementsERutledge7809.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Measurements",
+                name: "BPMeasurements",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Systolic = table.Column<int>(type: "int", nullable: false),
-                    Diastolic = table.Column<int>(type: "int", nullable: false),
-                    MeasurementDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PositionID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Systolic = table.Column<int>(type: "INTEGER", nullable: false),
+                    Diastolic = table.Column<int>(type: "INTEGER", nullable: false),
+                    MeasurementDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    PositionID = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Measurements", x => x.ID);
+                    table.PrimaryKey("PK_BPMeasurements", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Measurements_Positions_PositionID",
+                        name: "FK_BPMeasurements_Positions_PositionID",
                         column: x => x.PositionID,
                         principalTable: "Positions",
                         principalColumn: "ID",
@@ -58,8 +58,8 @@ namespace BPMeasurementsERutledge7809.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Measurements",
-                columns: new[] { "ID", "Diastolic", "Date Taken", "PositionID", "Systolic" },
+                table: "BPMeasurements",
+                columns: new[] { "ID", "Diastolic", "MeasurementDate", "PositionID", "Systolic" },
                 values: new object[,]
                 {
                     { 1, 80, new DateTime(2025, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "S", 120 },
@@ -70,8 +70,8 @@ namespace BPMeasurementsERutledge7809.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Measurements_PositionID",
-                table: "Measurements",
+                name: "IX_BPMeasurements_PositionID",
+                table: "BPMeasurements",
                 column: "PositionID");
         }
 
@@ -79,7 +79,7 @@ namespace BPMeasurementsERutledge7809.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Measurements");
+                name: "BPMeasurements");
 
             migrationBuilder.DropTable(
                 name: "Positions");

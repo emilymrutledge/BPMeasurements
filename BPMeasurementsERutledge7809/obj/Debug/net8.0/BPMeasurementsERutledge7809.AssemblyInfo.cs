@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BPMeasurementsERutledge7809")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+37555d320eee1c26610537dfc873bce43d77d811")]
 [assembly: System.Reflection.AssemblyProductAttribute("BPMeasurementsERutledge7809")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BPMeasurementsERutledge7809")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
